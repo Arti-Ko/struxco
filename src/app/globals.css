@@ -82,10 +82,10 @@
     /* Subtle engineering grid: 96px coarse + 24px fine
        Uses neutral hairline so it reads as drafting paper, not blueprint */
     background-image:
-      linear-gradient(rgba(38, 38, 42, 0.6) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(38, 38, 42, 0.6) 1px, transparent 1px),
-      linear-gradient(rgba(38, 38, 42, 0.25) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(38, 38, 42, 0.25) 1px, transparent 1px);
+      linear-gradient(rgba(38, 38, 42, 0.28) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38, 38, 42, 0.28) 1px, transparent 1px),
+      linear-gradient(rgba(38, 38, 42, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38, 38, 42, 0.1) 1px, transparent 1px);
     background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
     background-color: #0a0a0c;
   }

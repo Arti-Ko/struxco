@@ -58,8 +58,16 @@ export function ProjectFeed({
   }, [project, filter]);
 
   return (
-    <div className="mx-auto flex w-full max-w-[720px] flex-col">
-      <ol className="space-y-2.5">
+    <div
+      className="mx-auto flex w-full max-w-[720px] flex-col overflow-hidden rounded-2xl"
+      style={{
+        background: "#101013",
+        border: "1px solid #26262a",
+        boxShadow:
+          "0 1px 0 rgba(255,255,255,0.02) inset, 0 12px 32px rgba(0,0,0,0.35)",
+      }}
+    >
+      <ol className="space-y-2.5 p-5">
         {events.map((event, idx) => {
           const prev = events[idx - 1];
           // Сообщения подряд от того же автора визуально сливаются в группу:
@@ -91,7 +99,14 @@ export function ProjectFeed({
           </li>
         )}
       </ol>
-      {footer && <div className="mt-6">{footer}</div>}
+      {footer && (
+        <div
+          className="px-3 pt-3 pb-3"
+          style={{ borderTop: "1px solid #1c1c1f" }}
+        >
+          {footer}
+        </div>
+      )}
     </div>
   );
 }
