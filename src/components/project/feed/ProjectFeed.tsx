@@ -59,10 +59,25 @@ export function ProjectFeed({
 
   return (
     <div className="mx-auto flex w-full max-w-[720px] flex-col">
-      <ol className="space-y-5">
-        {events.map((event) => (
-          <li key={event.id}>{renderEvent(event, viewerRole, actions)}</li>
-        ))}
+      <ol className="space-y-2.5">
+        {events.map((event, idx) => {
+          const prev = events[idx - 1];
+          // Сообщения подряд от того же автора визуально сливаются в группу:
+          // у второго и далее скрываем шапку (compact) и уменьшаем зазор.
+          const compactMessage =
+            event.kind === "message" &&
+            prev?.kind === "message" &&
+            prev.authorRole === event.authorRole;
+          const extraGap =
+            event.kind !== "message" ||
+            prev?.kind !== "message" ||
+            prev.authorRole !== event.authorRole;
+          return (
+            <li key={event.id} className={extraGap ? "mt-3" : ""}>
+              {renderEvent(event, viewerRole, actions, compactMessage)}
+            </li>
+          );
+        })}
         {events.length === 0 && (
           <li
             className="rounded-lg p-6 text-center text-sm"
@@ -85,10 +100,17 @@ function renderEvent(
   event: FeedEvent,
   viewerRole: Role,
   actions: FeedActions | undefined,
+  compactMessage = false,
 ): React.ReactNode {
   switch (event.kind) {
     case "message":
-      return <FeedEventMessage event={event} />;
+      return (
+        <FeedEventMessage
+          event={event}
+          viewerRole={viewerRole}
+          compact={compactMessage}
+        />
+      );
     case "file_uploaded":
       return <FeedEventFile event={event} />;
     case "activity":
